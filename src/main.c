@@ -3,7 +3,7 @@
 #include "init.sdl.h"
 #include "init.game.h"
 
-#include "stage1.h"
+#include "stage.play.h"
 
 #include "input.h"
 #include "draw.h"

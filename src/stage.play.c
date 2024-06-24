@@ -1,7 +1,7 @@
 #include <SDL2/SDL.h>
 
-#include "stage1.h"
-#include "stage2.h"
+#include "stage.play.h"
+#include "stage.game-over.h"
 
 #include "game.h"
 #include "player.h"
