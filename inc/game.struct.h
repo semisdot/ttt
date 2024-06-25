@@ -13,6 +13,19 @@
 
 /* ---------------------------------------------------------------------------------------------------- */
 
+enum
+{
+	N_PERFORMED = 0,
+	PERFORMED
+};
+
+enum
+{
+	N_DETERMINED = 0,
+	TIE,
+	WIN
+};
+
 struct RGB_Color
 {
 	uint8_t r;
@@ -20,12 +33,20 @@ struct RGB_Color
 	uint8_t b;
 };
 
+struct move_info
+{
+	int move_status;
+	int game_status;
+};
+
+struct grid_position
+{
+	int row, col;
+};
+
 struct Player
 {
 	struct RGB_Color rect_color;
-
-	// <struct int row, col> rects[MAX_PLAYER_RECTS];
-	// int rect_count;
 };
 
 #if 0

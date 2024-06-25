@@ -4,6 +4,8 @@
 
 /* ---------------------------------------------------------------------------------------------------- */
 
+static int add_player_move(struct Game *game, int row, int col);
+
 static int game_tie(struct Game *game, int row, int col);
 static int game_win(struct Game *game, int row, int col);
 static int win_by_row(struct Game *game, int row, int col);
@@ -13,7 +15,29 @@ static int win_by_diagonal2(struct Game *game, int row, int col);
 
 /* ---------------------------------------------------------------------------------------------------- */
 
-int game_move(struct Game *game, int row, int col)
+void game_move(struct Game *game, struct grid_position *pos, struct move_info *info)
+{
+	if (add_player_move(game, pos->row, pos->col))
+	{
+		info->move_status = PERFORMED;
+	}
+}
+
+void game_status(struct Game *game, struct grid_position *pos, struct move_info *info)
+{
+	if (game_tie(game, pos->row, pos->col))
+	{
+		info->game_status = TIE;
+	}
+	else if (game_win(game, pos->row, pos->col))
+	{
+		info->game_status = WIN;
+	}
+}
+
+/* ---------------------------------------------------------------------------------------------------- */
+
+static int add_player_move(struct Game *game, int row, int col)
 {
 	int ret = 0;
 
@@ -26,16 +50,6 @@ int game_move(struct Game *game, int row, int col)
 
 	return ret;
 }
-
-int game_status(struct Game *game, int row, int col)
-{
-	if (game_tie(game, row, col)) return 0;
-	if (game_win(game, row, col)) return 0;
-
-	return 1;
-}
-
-/* ---------------------------------------------------------------------------------------------------- */
 
 static int game_tie(struct Game *game, int row, int col)
 {

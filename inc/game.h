@@ -2,5 +2,5 @@
 
 /* ---------------------------------------------------------------------------------------------------- */
 
-int game_move(struct Game *game, int row, int col);
-int game_status(struct Game *game, int row, int col);
+void game_move(struct Game *game, struct grid_position *pos, struct move_info *info);
+void game_status(struct Game *game, struct grid_position *pos, struct move_info *info);
