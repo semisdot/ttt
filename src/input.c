@@ -23,6 +23,12 @@ void input(struct Events *events)
 				// break;
 			}
 
+			case SDL_MOUSEMOTION:
+			{
+				SDL_GetMouseState(&events->mouse.x, &events->mouse.y);
+				break;
+			}
+
 			case SDL_MOUSEBUTTONDOWN:
 			{
 				mouse_button_down(&event.button, &events->mouse);
@@ -36,8 +42,6 @@ void input(struct Events *events)
 			}
 		}
 	}
-
-	SDL_GetMouseState(&events->mouse.x, &events->mouse.y);
 }
 
 /* ---------------------------------------------------------------------------------------------------- */

@@ -12,7 +12,7 @@ static void logic(struct application *app);
 // static void draw(struct application *app);
 
 static void mouse_to_grid(struct Events *events, struct grid_position *pos);
-// static void keyboard_to_grid(struct Events *events, int *row, int *col);
+// static void keyboard_to_grid(struct Events *events, struct grid_position *pos);
 
 /* ---------------------------------------------------------------------------------------------------- */
 
@@ -63,6 +63,6 @@ static void logic(struct application *app)
 static void mouse_to_grid(struct Events *events, struct grid_position *pos)
 {
 	// grid size == window size
-	pos->row = events->mouse.y / CELL_WIDTH;
-	pos->col = events->mouse.x / CELL_HEIGHT;
+	pos->row = events->mouse.y / CELL_HEIGHT;
+	pos->col = events->mouse.x / CELL_WIDTH;
 }

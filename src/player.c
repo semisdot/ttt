@@ -28,10 +28,7 @@ void init_player_colors(struct Player *players)
 
 	for (i = 0; i < MAX_PLAYERS; ++i)
 	{
-		// foo(&players[i].rect_color, &player_colors[i]);
-		players[i].rect_color.r = player_colors[i].r;
-		players[i].rect_color.g = player_colors[i].g;
-		players[i].rect_color.b = player_colors[i].b;
+		players[i].rect_color = player_colors[i];
 	}
 }
 
