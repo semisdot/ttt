@@ -33,15 +33,15 @@ struct RGB_Color
 	uint8_t b;
 };
 
+struct grid_position
+{
+	int row, col;
+};
+
 struct move_info
 {
 	int move_status;
 	int game_status;
-};
-
-struct grid_position
-{
-	int row, col;
 };
 
 struct Player
@@ -55,6 +55,7 @@ struct Grid
 	// SDL_Point point OR SDL_Rect rect/window
 
 	// struct RGB_Color background_color;
+	// struct RGB_Color line_color;
 
 	struct Player *cells[GRID_ROWS][GRID_COLUMNS]; // tiles/rects
 };

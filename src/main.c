@@ -28,7 +28,7 @@ int main(void)
 
 	init_SDL(&app.sdl);
 	init_game(&app.game);
-	init_stage1(&app);
+	init_stage_play(&app);
 
 	while (1) // main loop
 	{

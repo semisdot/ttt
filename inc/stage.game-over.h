@@ -2,4 +2,4 @@
 
 /* ---------------------------------------------------------------------------------------------------- */
 
-void init_stage2(struct application *app);
+void init_stage_game_over(struct application *app);

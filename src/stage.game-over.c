@@ -12,7 +12,7 @@ static void logic(struct application *app);
 
 /* ---------------------------------------------------------------------------------------------------- */
 
-void init_stage2(struct application *app)
+void init_stage_game_over(struct application *app)
 {
 	app->delegate.logic = logic;
 	// app->delegate.draw = draw;
@@ -31,6 +31,6 @@ static void logic(struct application *app)
 
 		next_starting_player(&app->game);
 
-		init_stage1(app);
+		init_stage_play(app);
 	}
 }

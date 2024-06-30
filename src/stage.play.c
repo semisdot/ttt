@@ -16,7 +16,7 @@ static void mouse_to_grid(struct Events *events, struct grid_position *pos);
 
 /* ---------------------------------------------------------------------------------------------------- */
 
-void init_stage1(struct application *app)
+void init_stage_play(struct application *app)
 {
 	app->delegate.logic = logic;
 	// app->delegate.draw = draw;
@@ -52,7 +52,7 @@ static void logic(struct application *app)
 			}
 			else
 			{
-				init_stage2(app);
+				init_stage_game_over(app);
 			}
 		}
 

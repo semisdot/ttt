@@ -2,4 +2,4 @@
 
 /* ---------------------------------------------------------------------------------------------------- */
 
-void init_stage1(struct application *app);
+void init_stage_play(struct application *app);
