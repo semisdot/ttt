@@ -24,7 +24,7 @@ void init_stage_play(struct application *app)
 	// clear events
 	memset(app->events.mouse.buttons, 0, sizeof(app->events.mouse.buttons[0]) * MAX_MOUSE_BUTTONS);
 
-	// memset(app->game.grid, 0, sizeof(app->game.grid[0][0]) * MAX_GRID_CELLS);
+	// memset(app->game.grid.cells, 0, sizeof(app->game.grid.cells[0][0]) * MAX_GRID_CELLS);
 }
 
 /* ---------------------------------------------------------------------------------------------------- */

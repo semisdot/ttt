@@ -25,9 +25,9 @@ static void mySDL_SetRenderDrawColor(SDL_Renderer *renderer, struct RGB_Color *r
 
 /* ---------------------------------------------------------------------------------------------------- */
 
-static void draw_grid(struct SDL *sdl);
-static void draw_grid_background(struct SDL *sdl);
-static void draw_grid_lines(struct SDL *sdl);
+static void draw_grid(struct SDL *sdl, struct Game *game);
+static void draw_grid_background(struct SDL *sdl, struct Game *game);
+static void draw_grid_lines(struct SDL *sdl, struct Game *game);
 
 static void draw_players(struct SDL *sdl, struct Game *game);
 
@@ -35,23 +35,23 @@ static void draw_players(struct SDL *sdl, struct Game *game);
 
 void draw(struct SDL *sdl, struct Game *game)
 {
-	draw_grid(sdl);
+	draw_grid(sdl, game);
 	draw_players(sdl, game);
 }
 
 /* ---------------------------------------------------------------------------------------------------- */
 
-static void draw_grid(struct SDL *sdl)
+static void draw_grid(struct SDL *sdl, struct Game *game)
 {
-	draw_grid_background(sdl);
-	draw_grid_lines(sdl);
+	draw_grid_background(sdl, game);
+	draw_grid_lines(sdl, game);
 }
 
-static void draw_grid_background(struct SDL *sdl)
+static void draw_grid_background(struct SDL *sdl, struct Game *game)
 {
 	SDL_Rect rect;
 
-	SDL_SetRenderDrawColor(sdl->renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
+	mySDL_SetRenderDrawColor(sdl->renderer, &game->grid.background_color);
 
 	rect.x = 0;
 	rect.y = 0;
@@ -61,13 +61,13 @@ static void draw_grid_background(struct SDL *sdl)
 	SDL_RenderFillRect(sdl->renderer, &rect);
 }
 
-static void draw_grid_lines(struct SDL *sdl)
+static void draw_grid_lines(struct SDL *sdl, struct Game *game)
 {
 	struct Line h_line; // horizontal line
 	struct Line v_line; // vertical line
 	int i;
 
-	SDL_SetRenderDrawColor(sdl->renderer, 128, 128, 128, SDL_ALPHA_OPAQUE);
+	mySDL_SetRenderDrawColor(sdl->renderer, &game->grid.line_color);
 
 	h_line.x1 = 0;
 	h_line.x2 = GRID_WIDTH - 1;
@@ -94,7 +94,7 @@ static void draw_players(struct SDL *sdl, struct Game *game)
 	{
 		for (col = 0; col < GRID_COLUMNS; ++col)
 		{
-			player = game->grid[row][col];
+			player = game->grid.cells[row][col];
 
 			if (player)
 			{

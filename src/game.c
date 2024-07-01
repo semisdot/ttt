@@ -41,9 +41,9 @@ static int add_player_move(struct Game *game, int row, int col)
 {
 	int ret = 0;
 
-	if (game->grid[row][col] == NULL)
+	if (game->grid.cells[row][col] == NULL)
 	{
-		game->grid[row][col] = game->active_player;
+		game->grid.cells[row][col] = game->active_player;
 
 		ret = 1;
 	}
@@ -61,7 +61,7 @@ static int game_tie(struct Game *game, int row, int col)
 	{
 		cell_in = ((row * N) + (col + i)) % MAX_GRID_CELLS;
 
-		if (game->grid[0][cell_in] == NULL)
+		if (game->grid.cells[0][cell_in] == NULL)
 		{
 			goto end;
 		}
@@ -78,7 +78,7 @@ static int game_win(struct Game *game, int row, int col)
 	if (win_by_row(game, row, col)) return 1;
 	if (win_by_col(game, row, col)) return 1;
 
-	if (game->active_player == game->grid[1][1]) // (N - 1) / 2
+	if (game->active_player == game->grid.cells[1][1]) // (N - 1) / 2
 	{
 		if (win_by_diagonal1(game, row, col)) return 1;
 		if (win_by_diagonal2(game, row, col)) return 1;
@@ -97,7 +97,7 @@ static int win_by_row(struct Game *game, int row, int col)
 	{
 		col_in = (col + i) % N;
 
-		if (!(game->grid[row][col_in] == game->active_player))
+		if (!(game->grid.cells[row][col_in] == game->active_player))
 		{
 			goto end;
 		}
@@ -119,7 +119,7 @@ static int win_by_col(struct Game *game, int row, int col)
 	{
 		row_in = (row + i) % N;
 
-		if (!(game->grid[row_in][col] == game->active_player))
+		if (!(game->grid.cells[row_in][col] == game->active_player))
 		{
 			goto end;
 		}
@@ -147,7 +147,7 @@ static int win_by_diagonal1(struct Game *game, int row, int col)
 		row_in = (row + i) % N;
 		col_in = (col + i) % N;
 
-		if (!(game->grid[row_in][col_in] == game->active_player))
+		if (!(game->grid.cells[row_in][col_in] == game->active_player))
 		{
 			goto end;
 		}
@@ -175,7 +175,7 @@ static int win_by_diagonal2(struct Game *game, int row, int col)
 		row_in = (row + i) % N;
 		col_in = (N + (col - i)) % N;
 
-		if (!(game->grid[row_in][col_in] == game->active_player))
+		if (!(game->grid.cells[row_in][col_in] == game->active_player))
 		{
 			goto end;
 		}

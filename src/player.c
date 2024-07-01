@@ -16,22 +16,6 @@ static struct Player *next_player(struct Player *players, struct Player *curr_pl
 
 /* ---------------------------------------------------------------------------------------------------- */
 
-void init_player_colors(struct Player *players)
-{
-	const struct RGB_Color player_colors[MAX_PLAYERS] =
-	{
-		{0, 0, 255}, // {COLOR_BLUE	} // {P1_COLOR}
-		{255, 0, 0}  // {RGB_RED	} // {P2_COLOR}
-	};
-
-	int i;
-
-	for (i = 0; i < MAX_PLAYERS; ++i)
-	{
-		players[i].rect_color = player_colors[i];
-	}
-}
-
 void init_starting_player(struct Game *game)
 {
 	game->starting_player	= game->players;

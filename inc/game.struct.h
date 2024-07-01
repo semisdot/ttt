@@ -49,21 +49,19 @@ struct Player
 	struct RGB_Color rect_color;
 };
 
-#if 0
 struct Grid
 {
 	// SDL_Point point OR SDL_Rect rect/window
 
-	// struct RGB_Color background_color;
-	// struct RGB_Color line_color;
+	struct RGB_Color background_color;
+	struct RGB_Color line_color;
 
 	struct Player *cells[GRID_ROWS][GRID_COLUMNS]; // tiles/rects
 };
-#endif
 
 struct Game
 {
-	struct Player *grid[GRID_ROWS][GRID_COLUMNS];
+	struct Grid grid;
 
 	struct Player players[MAX_PLAYERS];
 
