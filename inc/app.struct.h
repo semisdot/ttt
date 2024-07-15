@@ -19,10 +19,10 @@ struct delegation
 
 struct application
 {
-	struct delegation stage;
-	struct SDL sdl;
-	struct Events events;
-	struct Game game;
+	struct delegation	stage;
+	struct SDL			sdl;
+	struct Events		events;
+	struct Game			game;
 };
 
 /* ---------------------------------------------------------------------------------------------------- */

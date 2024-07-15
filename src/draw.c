@@ -25,7 +25,6 @@ static void mySDL_SetRenderDrawColor(SDL_Renderer *renderer, struct RGB_Color *r
 
 /* ---------------------------------------------------------------------------------------------------- */
 
-static void draw_grid(struct SDL *sdl, struct Game *game);
 static void draw_grid_background(struct SDL *sdl, struct Game *game);
 static void draw_grid_lines(struct SDL *sdl, struct Game *game);
 
@@ -35,17 +34,12 @@ static void draw_players(struct SDL *sdl, struct Game *game);
 
 void draw(struct SDL *sdl, struct Game *game)
 {
-	draw_grid(sdl, game);
+	draw_grid_background(sdl, game);
 	draw_players(sdl, game);
+	draw_grid_lines(sdl, game);
 }
 
 /* ---------------------------------------------------------------------------------------------------- */
-
-static void draw_grid(struct SDL *sdl, struct Game *game)
-{
-	draw_grid_background(sdl, game);
-	draw_grid_lines(sdl, game);
-}
 
 static void draw_grid_background(struct SDL *sdl, struct Game *game)
 {
