@@ -5,7 +5,8 @@
 !.gitignore
 
 # Ignore directories:
-/build
+build/
+screenshots/
 
 # Ignore executables:
 ttt
