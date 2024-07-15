@@ -1,5 +1,9 @@
 # ttt
 
+## controls
+[left mouse button] make a move
+[right mouse button] new game
+
 ## makefile
 ```
 make all
