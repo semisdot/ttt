@@ -36,7 +36,7 @@ int main(void)
 
 		input(&app.events);
 
-		app.delegate.logic(&app);
+		app.stage.logic(&app);
 
 		draw(&app.sdl, &app.game);
 

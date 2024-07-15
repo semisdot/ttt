@@ -14,8 +14,8 @@ static void logic(struct application *app);
 
 void init_stage_game_over(struct application *app)
 {
-	app->delegate.logic = logic;
-	// app->delegate.draw = draw;
+	app->stage.logic = logic;
+	// app->stage.draw = draw;
 
 	// clear events
 	memset(app->events.mouse.buttons, 0, sizeof(app->events.mouse.buttons[0]) * MAX_MOUSE_BUTTONS);

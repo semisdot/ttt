@@ -18,8 +18,8 @@ static void mouse_to_grid(struct Events *events, struct grid_position *pos);
 
 void init_stage_play(struct application *app)
 {
-	app->delegate.logic = logic;
-	// app->delegate.draw = draw;
+	app->stage.logic = logic;
+	// app->stage.draw = draw;
 
 	// clear events
 	memset(app->events.mouse.buttons, 0, sizeof(app->events.mouse.buttons[0]) * MAX_MOUSE_BUTTONS);
