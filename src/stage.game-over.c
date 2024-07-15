@@ -27,8 +27,6 @@ static void logic(struct application *app)
 {
 	if (app->events.mouse.buttons[SDL_BUTTON_RIGHT])
 	{
-		memset(app->game.grid.cells, 0, sizeof(app->game.grid.cells[0][0]) * MAX_GRID_CELLS);
-
 		next_starting_player(&app->game);
 
 		init_stage_play(app);

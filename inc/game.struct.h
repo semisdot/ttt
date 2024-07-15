@@ -51,8 +51,6 @@ struct Player
 
 struct Grid
 {
-	// SDL_Point point OR SDL_Rect rect/window
-
 	struct RGB_Color background_color;
 	struct RGB_Color line_color;
 
