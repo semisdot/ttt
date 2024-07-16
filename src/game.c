@@ -25,13 +25,13 @@ void game_move(struct Game *game, struct grid_position *pos, struct move_info *i
 
 void game_status(struct Game *game, struct grid_position *pos, struct move_info *info)
 {
-	if (game_tie(game, pos->row, pos->col))
-	{
-		info->game_status = TIE;
-	}
-	else if (game_win(game, pos->row, pos->col))
+	if (game_win(game, pos->row, pos->col))
 	{
 		info->game_status = WIN;
+	}
+	else if (game_tie(game, pos->row, pos->col))
+	{
+		info->game_status = TIE;
 	}
 }
 
