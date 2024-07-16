@@ -22,7 +22,7 @@ enum
 enum
 {
 	N_DETERMINED = 0,
-	TIE,
+	DRAW,
 	WIN
 };
 

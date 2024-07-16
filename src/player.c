@@ -37,15 +37,17 @@ void next_active_player(struct Game *game)
 
 static struct Player *next_player(struct Player *players, struct Player *curr_player, int next_i)
 {
-	struct Player *next_player = NULL;
+	struct Player *next_player;
 	int curr_player_i;
 	int next_player_i;
 
 	curr_player_i = curr_player - &players[0];
 
 #if 0
-	if (!(curr_player_i >= 0 && curr_player_i < MAX_PLAYERS))
+	if (curr_player_i < 0 || curr_player_i >= MAX_PLAYERS)
 	{
+		next_player = NULL;
+
 		goto end;
 	}
 #endif

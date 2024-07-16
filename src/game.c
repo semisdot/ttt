@@ -31,7 +31,7 @@ void game_status(struct Game *game, struct grid_position *pos, struct move_info 
 	}
 	else if (game_tie(game, pos->row, pos->col))
 	{
-		info->game_status = TIE;
+		info->game_status = DRAW;
 	}
 }
 
