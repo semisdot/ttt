@@ -51,10 +51,12 @@ struct Player
 
 struct Grid
 {
+	struct Player *cells[GRID_ROWS][GRID_COLUMNS]; // tiles/rects
+
+	int rect_count;
+
 	struct RGB_Color background_color;
 	struct RGB_Color line_color;
-
-	struct Player *cells[GRID_ROWS][GRID_COLUMNS]; // tiles/rects
 };
 
 struct Game

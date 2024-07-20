@@ -6,7 +6,7 @@
 
 static int add_player_move(struct Game *game, int row, int col);
 
-static int game_draw(struct Game *game, int row, int col);
+static int game_draw(struct Game *game);
 static int game_win(struct Game *game, int row, int col);
 static int win_by_row(struct Game *game, int row, int col);
 static int win_by_col(struct Game *game, int row, int col);
@@ -29,7 +29,7 @@ void game_status(struct Game *game, struct grid_position *pos, struct move_info 
 	{
 		info->game_status = WIN;
 	}
-	else if (game_draw(game, pos->row, pos->col))
+	else if (game_draw(game))
 	{
 		info->game_status = DRAW;
 	}
@@ -44,6 +44,7 @@ static int add_player_move(struct Game *game, int row, int col)
 	if (game->grid.cells[row][col] == NULL)
 	{
 		game->grid.cells[row][col] = game->active_player;
+		game->grid.rect_count += 1;
 
 		ret = 1;
 	}
@@ -51,26 +52,9 @@ static int add_player_move(struct Game *game, int row, int col)
 	return ret;
 }
 
-static int game_draw(struct Game *game, int row, int col)
+static int game_draw(struct Game *game)
 {
-	int ret = 0;
-	int cell_in;
-	int i;
-
-	for (i = 1; i < MAX_GRID_CELLS; ++i)
-	{
-		cell_in = ((row * N) + (col + i)) % MAX_GRID_CELLS;
-
-		if (game->grid.cells[0][cell_in] == NULL)
-		{
-			goto end;
-		}
-	}
-
-	ret = 1;
-
-end:
-	return ret;
+	return (game->grid.rect_count == MAX_GRID_CELLS);
 }
 
 static int game_win(struct Game *game, int row, int col)
