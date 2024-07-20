@@ -6,7 +6,7 @@
 
 static int add_player_move(struct Game *game, int row, int col);
 
-static int game_tie(struct Game *game, int row, int col);
+static int game_draw(struct Game *game, int row, int col);
 static int game_win(struct Game *game, int row, int col);
 static int win_by_row(struct Game *game, int row, int col);
 static int win_by_col(struct Game *game, int row, int col);
@@ -29,7 +29,7 @@ void game_status(struct Game *game, struct grid_position *pos, struct move_info 
 	{
 		info->game_status = WIN;
 	}
-	else if (game_tie(game, pos->row, pos->col))
+	else if (game_draw(game, pos->row, pos->col))
 	{
 		info->game_status = DRAW;
 	}
@@ -51,7 +51,7 @@ static int add_player_move(struct Game *game, int row, int col)
 	return ret;
 }
 
-static int game_tie(struct Game *game, int row, int col)
+static int game_draw(struct Game *game, int row, int col)
 {
 	int ret = 0;
 	int cell_in;

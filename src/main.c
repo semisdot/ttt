@@ -12,10 +12,12 @@
 
 /* ---------------------------------------------------------------------------------------------------- */
 
-#define FPS			30 // ~
-#define DELAY_TIME	(1000 / FPS)
+#define FPS				30 // ~
+#define MS_PER_FRAME	(1000 / FPS)
 
 /* ---------------------------------------------------------------------------------------------------- */
+
+static void frame_rate(long *elapsed);
 
 static void clear(struct SDL *sdl);
 static void present(struct SDL *sdl);
@@ -30,6 +32,8 @@ int main(void)
 	init_game(&app.game);
 	init_stage_play(&app);
 
+	long elapsed = SDL_GetTicks();
+
 	while (1) // main loop
 	{
 		clear(&app.sdl);
@@ -42,13 +46,29 @@ int main(void)
 
 		present(&app.sdl);
 
-		SDL_Delay(DELAY_TIME);
+		frame_rate(&elapsed);
 	}
 
 	return 0;
 }
 
 /* ---------------------------------------------------------------------------------------------------- */
+
+static void frame_rate(long *elapsed)
+{
+	long frame_time;
+	long delay_time;
+
+	frame_time = SDL_GetTicks() - *elapsed;
+	delay_time = MS_PER_FRAME - frame_time;
+
+	if (delay_time > 0)
+	{
+		SDL_Delay(delay_time);
+	}
+
+	*elapsed = SDL_GetTicks();
+}
 
 static void clear(struct SDL *sdl)
 {
