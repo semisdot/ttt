@@ -12,12 +12,12 @@
 
 /* ---------------------------------------------------------------------------------------------------- */
 
-#define FPS				30 // ~
-#define MS_PER_FRAME	(1000 / FPS)
+#define FPS				60 // ~
+#define MS_PER_FRAME	(1000.0 / FPS)
 
 /* ---------------------------------------------------------------------------------------------------- */
 
-static void frame_rate(long *elapsed);
+static void frame_rate(long *last_time);
 
 static void clear(struct SDL *sdl);
 static void present(struct SDL *sdl);
@@ -32,7 +32,7 @@ int main(void)
 	init_game(&app.game);
 	init_stage_play(&app);
 
-	long elapsed = SDL_GetTicks();
+	long last_time = SDL_GetTicks();
 
 	while (1) // main loop
 	{
@@ -46,7 +46,7 @@ int main(void)
 
 		present(&app.sdl);
 
-		frame_rate(&elapsed);
+		frame_rate(&last_time);
 	}
 
 	return 0;
@@ -54,20 +54,30 @@ int main(void)
 
 /* ---------------------------------------------------------------------------------------------------- */
 
-static void frame_rate(long *elapsed)
+static void frame_rate(long *last_time)
 {
+	static float remainder = 0;
+
+	long current_time;
 	long frame_time;
 	long delay_time;
 
-	frame_time = SDL_GetTicks() - *elapsed;
-	delay_time = MS_PER_FRAME - frame_time;
+	remainder += MS_PER_FRAME - (int)MS_PER_FRAME;
+	delay_time = MS_PER_FRAME + remainder;
+
+	current_time = SDL_GetTicks();
+
+	frame_time = current_time - *last_time;
+	delay_time -= frame_time;
 
 	if (delay_time > 0)
 	{
 		SDL_Delay(delay_time);
 	}
 
-	*elapsed = SDL_GetTicks();
+	remainder -= (int)remainder;
+
+	*last_time = SDL_GetTicks();
 }
 
 static void clear(struct SDL *sdl)
