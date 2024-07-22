@@ -45,7 +45,7 @@ static void draw_grid_background(struct SDL *sdl, struct Game *game)
 {
 	SDL_Rect rect;
 
-	mySDL_SetRenderDrawColor(sdl->renderer, &game->grid.background_color);
+	mySDL_SetRenderDrawColor(sdl->renderer, &game->grid.colors[GRID_BACKGROUND_COLOR]);
 
 	rect.x = 0;
 	rect.y = 0;
@@ -61,7 +61,7 @@ static void draw_grid_lines(struct SDL *sdl, struct Game *game)
 	struct Line v_line; // vertical line
 	int i;
 
-	mySDL_SetRenderDrawColor(sdl->renderer, &game->grid.line_color);
+	mySDL_SetRenderDrawColor(sdl->renderer, &game->grid.colors[GRID_LINE_COLOR]);
 
 	h_line.x1 = 0;
 	h_line.x2 = GRID_WIDTH - 1;
@@ -94,7 +94,7 @@ static void draw_players(struct SDL *sdl, struct Game *game)
 			{
 				SDL_Rect rect;
 
-				mySDL_SetRenderDrawColor(sdl->renderer, &player->rect_color);
+				mySDL_SetRenderDrawColor(sdl->renderer, &player->color);
 
 				rect.x = col * CELL_WIDTH;
 				rect.y = row * CELL_HEIGHT;

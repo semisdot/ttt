@@ -1,4 +1,4 @@
-#include <string.h> // memset()
+// #include <string.h> // memset()
 
 #include "init.game.h"
 
@@ -25,32 +25,30 @@ static void init_player_colors(struct Player *players)
 {
 	const struct RGB_Color player_colors[MAX_PLAYERS] =
 	{
-		{0, 0, 255},
-		{255, 0, 0}
+		{  0, 0, 255},
+		{255, 0,   0}
 	};
 
 	int i;
 
 	for (i = 0; i < MAX_PLAYERS; ++i)
 	{
-		players[i].rect_color = player_colors[i];
+		players[i].color = player_colors[i];
 	}
 }
 
 static void init_grid_colors(struct Grid *grid)
 {
-	enum
-	{
-		GRID_BACKGROUND_COLOR,
-		GRID_LINE_COLOR
-	};
-
 	const struct RGB_Color grid_colors[] =
 	{
-		{0, 0, 0},
+		{  0,   0,   0},
 		{128, 128, 128}
 	};
 
-	grid->background_color	= grid_colors[GRID_BACKGROUND_COLOR	];
-	grid->line_color		= grid_colors[GRID_LINE_COLOR		];
+	int i;
+
+	for (i = 0; i < GRID_COLORS; ++i)
+	{
+		grid->colors[i]	= grid_colors[i];
+	}
 }

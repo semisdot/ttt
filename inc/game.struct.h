@@ -26,6 +26,13 @@ enum
 	WIN
 };
 
+enum
+{
+	GRID_BACKGROUND_COLOR,
+	GRID_LINE_COLOR,
+	GRID_COLORS
+};
+
 struct RGB_Color
 {
 	uint8_t r;
@@ -46,7 +53,7 @@ struct move_info
 
 struct Player
 {
-	struct RGB_Color rect_color;
+	struct RGB_Color color;
 };
 
 struct Grid
@@ -55,8 +62,7 @@ struct Grid
 
 	int rect_count;
 
-	struct RGB_Color background_color;
-	struct RGB_Color line_color;
+	struct RGB_Color colors[GRID_COLORS];
 };
 
 struct Game
