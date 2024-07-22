@@ -17,7 +17,7 @@
 
 /* ---------------------------------------------------------------------------------------------------- */
 
-static void frame_rate(long *last_time);
+static void frame_rate(unsigned *last_time);
 
 static void clear(struct SDL *sdl);
 static void present(struct SDL *sdl);
@@ -27,12 +27,13 @@ static void present(struct SDL *sdl);
 int main(void)
 {
 	struct application app;
+	unsigned last_time;
 
 	init_SDL(&app.sdl);
 	init_game(&app.game);
 	init_stage_play(&app);
 
-	long last_time = SDL_GetTicks();
+	last_time = SDL_GetTicks();
 
 	while (1) // main loop
 	{
@@ -54,12 +55,12 @@ int main(void)
 
 /* ---------------------------------------------------------------------------------------------------- */
 
-static void frame_rate(long *last_time)
+static void frame_rate(unsigned *last_time)
 {
-	static float remainder = 0.0;
+	static float remainder = 0.0f;
 
-	long current_time;
-	long frame_time;
+	unsigned current_time;
+	unsigned frame_time;
 	long delay_time;
 
 	remainder += MS_PER_FRAME - (int)MS_PER_FRAME;
