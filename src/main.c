@@ -12,7 +12,7 @@
 
 /* ---------------------------------------------------------------------------------------------------- */
 
-#define FPS				60 // ~
+#define FPS				30 // ~
 #define MS_PER_FRAME	(1000.0 / FPS)
 
 /* ---------------------------------------------------------------------------------------------------- */
@@ -56,7 +56,7 @@ int main(void)
 
 static void frame_rate(long *last_time)
 {
-	static float remainder = 0;
+	static float remainder = 0.0;
 
 	long current_time;
 	long frame_time;

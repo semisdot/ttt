@@ -6,12 +6,13 @@
 
 static int add_player_move(struct Game *game, int row, int col);
 
-static int game_draw(struct Game *game);
 static int game_win(struct Game *game, int row, int col);
 static int win_by_row(struct Game *game, int row, int col);
 static int win_by_col(struct Game *game, int row, int col);
 static int win_by_diagonal1(struct Game *game, int row, int col);
 static int win_by_diagonal2(struct Game *game, int row, int col);
+
+static int game_draw(struct Game *game);
 
 /* ---------------------------------------------------------------------------------------------------- */
 
@@ -52,17 +53,12 @@ static int add_player_move(struct Game *game, int row, int col)
 	return ret;
 }
 
-static int game_draw(struct Game *game)
-{
-	return (game->grid.rect_count == MAX_GRID_CELLS);
-}
-
 static int game_win(struct Game *game, int row, int col)
 {
 	if (win_by_row(game, row, col)) return 1;
 	if (win_by_col(game, row, col)) return 1;
 
-	if (game->active_player == game->grid.cells[1][1]) // (N - 1) / 2
+	if (game->active_player == game->grid.cells[1][1]) // [(N - 1) / 2]
 	{
 		if (win_by_diagonal1(game, row, col)) return 1;
 		if (win_by_diagonal2(game, row, col)) return 1;
@@ -121,7 +117,7 @@ static int win_by_diagonal1(struct Game *game, int row, int col)
 	int row_in, col_in;
 	int i;
 
-	if (row != col)
+	if (row != col) // (row - col != 0)
 	{
 		goto end;
 	}
@@ -169,4 +165,9 @@ static int win_by_diagonal2(struct Game *game, int row, int col)
 
 end:
 	return ret;
+}
+
+static int game_draw(struct Game *game)
+{
+	return (game->grid.rect_count == MAX_GRID_CELLS);
 }
