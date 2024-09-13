@@ -16,17 +16,17 @@ static int game_draw(struct Game *game);
 
 /* ---------------------------------------------------------------------------------------------------- */
 
-void game_move(struct Game *game, struct grid_position *pos, struct move_info *info)
+void game_move(struct Game *game, struct grid_position *grid_pos, struct move_info *info)
 {
-	if (add_player_move(game, pos->row, pos->col))
+	if (add_player_move(game, grid_pos->row, grid_pos->col))
 	{
 		info->move_status = PERFORMED;
 	}
 }
 
-void game_status(struct Game *game, struct grid_position *pos, struct move_info *info)
+void game_status(struct Game *game, struct grid_position *grid_pos, struct move_info *info)
 {
-	if (game_win(game, pos->row, pos->col))
+	if (game_win(game, grid_pos->row, grid_pos->col))
 	{
 		info->game_status = WIN;
 	}
@@ -70,14 +70,11 @@ static int game_win(struct Game *game, int row, int col)
 static int win_by_row(struct Game *game, int row, int col)
 {
 	int ret = 0;
-	int col_in;
 	int i;
 
-	for (i = 1; i < N; ++i)
+	for (i = 0; i < N; ++i)
 	{
-		col_in = (col + i) % N;
-
-		if (game->grid.cells[row][col_in] != game->active_player)
+		if (game->grid.cells[row][i] != game->active_player)
 		{
 			goto end;
 		}
@@ -92,14 +89,11 @@ end:
 static int win_by_col(struct Game *game, int row, int col)
 {
 	int ret = 0;
-	int row_in;
 	int i;
 
-	for (i = 1; i < N; ++i)
+	for (i = 0; i < N; ++i)
 	{
-		row_in = (row + i) % N;
-
-		if (game->grid.cells[row_in][col] != game->active_player)
+		if (game->grid.cells[i][col] != game->active_player)
 		{
 			goto end;
 		}
@@ -114,7 +108,6 @@ end:
 static int win_by_diagonal1(struct Game *game, int row, int col)
 {
 	int ret = 0;
-	int row_in, col_in;
 	int i;
 
 	if (row != col) // (row - col != 0)
@@ -122,12 +115,9 @@ static int win_by_diagonal1(struct Game *game, int row, int col)
 		goto end;
 	}
 
-	for (i = 1; i < N; ++i)
+	for (i = 0; i < N; ++i)
 	{
-		row_in = (row + i) % N;
-		col_in = (col + i) % N;
-
-		if (game->grid.cells[row_in][col_in] != game->active_player)
+		if (game->grid.cells[i][i] != game->active_player)
 		{
 			goto end;
 		}
@@ -142,7 +132,6 @@ end:
 static int win_by_diagonal2(struct Game *game, int row, int col)
 {
 	int ret = 0;
-	int row_in, col_in;
 	int i;
 
 	if (row + col != N - 1)
@@ -150,12 +139,9 @@ static int win_by_diagonal2(struct Game *game, int row, int col)
 		goto end;
 	}
 
-	for (i = 1; i < N; ++i)
+	for (i = 0; i < N; ++i)
 	{
-		row_in = (row + i) % N;
-		col_in = (N + (col - i)) % N;
-
-		if (game->grid.cells[row_in][col_in] != game->active_player)
+		if (game->grid.cells[i][(N - 1) - i] != game->active_player)
 		{
 			goto end;
 		}
