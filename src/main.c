@@ -1,5 +1,7 @@
 #include <SDL2/SDL.h>
 
+#include "defs.h"
+
 #include "init.sdl.h"
 #include "init.game.h"
 
@@ -13,11 +15,11 @@
 /* ---------------------------------------------------------------------------------------------------- */
 
 #define FPS				60 // ~
-#define MS_PER_FRAME	(1000.0 / FPS)
+// #define MS_PER_FRAME	(1000.0 / FPS)
 
 /* ---------------------------------------------------------------------------------------------------- */
 
-static void frame_rate(unsigned *last_time);
+static void frame_rate(void);
 
 static void clear(struct SDL *sdl);
 static void present(struct SDL *sdl);
@@ -27,15 +29,15 @@ static void present(struct SDL *sdl);
 int main(void)
 {
 	struct application app;
-	unsigned last_time;
+	// uint last_time;
 
 	init_SDL(&app.sdl);
 	init_game(&app.game);
 	init_stage_play(&app);
 
-	last_time = SDL_GetTicks();
+	// last_time = SDL_GetTicks();
 
-	while (1) // main loop
+	while (1)
 	{
 		clear(&app.sdl);
 
@@ -47,7 +49,7 @@ int main(void)
 
 		present(&app.sdl);
 
-		frame_rate(&last_time);
+		frame_rate();
 	}
 
 	return 0;
@@ -55,12 +57,18 @@ int main(void)
 
 /* ---------------------------------------------------------------------------------------------------- */
 
-static void frame_rate(unsigned *last_time)
+static void frame_rate(void)
+{
+	SDL_Delay(1000 / FPS);
+}
+
+#if 0
+static void frame_rate(uint *last_time)
 {
 	static float remainder = 0.0f;
 
-	unsigned current_time;
-	unsigned frame_time;
+	uint current_time;
+	uint frame_time;
 	long delay_time;
 
 	remainder += MS_PER_FRAME - (int)MS_PER_FRAME;
@@ -80,6 +88,7 @@ static void frame_rate(unsigned *last_time)
 
 	*last_time = SDL_GetTicks();
 }
+#endif
 
 static void clear(struct SDL *sdl)
 {
